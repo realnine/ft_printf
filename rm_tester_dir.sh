@@ -1,0 +1,1 @@
+rm -rf pft/ 42TESTERS-PRINTF/ printf_lover_v2/
