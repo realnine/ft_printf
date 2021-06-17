@@ -6,13 +6,13 @@
 /*   By: jinglee <jinglee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 00:39:45 by jinglee           #+#    #+#             */
-/*   Updated: 2021/06/16 00:44:15 by jinglee          ###   ########.fr       */
+/*   Updated: 2021/06/17 18:56:33 by jinglee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_get_args(va_list ap, t_flags *flags)
+int		ft_get_args(va_list ap, t_flags *flags)
 {
 	if (flags->type == 'c')
 	{
@@ -47,7 +47,7 @@ char	*ft_percent_check(t_flags *flags, va_list ap, char *format)
 	ft_init_flags(flags);
 	format = ft_check_flags(flags, format, ap);
 	if (ft_get_args(ap, flags) == -1)
-		return (-1);
+		return (NULL);
 	return (format);
 }
 
@@ -69,7 +69,8 @@ int		ft_check_format(char *format, va_list ap)
 		}
 		if (*format == '%')
 		{
-			format = ft_percent_check(flags, ap, format);
+			if(!(format = ft_percent_check(flags, ap, format)))
+				return (-1);
 			if (!(str = ft_apply_flags(flags)))
 				return (-1);
 			cnt += ft_final_putstr(flags, str);
@@ -88,4 +89,12 @@ int		ft_printf(const char *format, ...)
 	i = ft_check_format((char *)format, ap);
 	va_end(ap);
 	return (i);
+}
+int main()
+{
+	ft_printf("%d\n", 42);
+	ft_printf("%s\n", "42");
+	ft_printf("%c\n", 'c');
+	system("leaks a.out > leaks_result; cat leaks_result | grep leaked && rm -rf leaks_result");
+	return (0);
 }
