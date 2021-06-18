@@ -17,7 +17,7 @@ int	ft_final_putstr(t_flags *flags, char *str)
 	int	cnt;
 
 	cnt = ft_strlen(str);
-	if (flags->type == 'c' && *(flags->ap_str) == '\0')
+	if (flags->type == 'c' && *flags->ap_str == '\0')
 	{
 		if (flags->minus > 0)
 		{
@@ -30,11 +30,10 @@ int	ft_final_putstr(t_flags *flags, char *str)
 			ft_putchar('\0');
 		}
 		cnt++;
+		free(flags->ap_str);
 	}
 	else
 		ft_putstr(str);
-	if (&(*str) != &(*flags->ap_str))
-		free(flags->ap_str);
 	free(str);
 	return (cnt);
 }

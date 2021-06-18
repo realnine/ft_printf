@@ -34,6 +34,7 @@ char	*ft_put_space(char *str, t_flags *flags, int empty_num)
 		while (empty_num--)
 			str[i++] = ' ';
 	}
+	free(tmp);
 	return (str);
 }
 
@@ -58,6 +59,7 @@ char	*ft_put_zero_prec(char *str, t_flags *flags, int gap_num)
 		while (gap_num-- > 0)
 			str[i++] = '0';
 		ft_strcpy(&str[i], tmp + j);
+		free(tmp);
 	}
 	return (str);
 }
@@ -83,6 +85,7 @@ char	*ft_put_zero_width(char *str, t_flags *flags, int gap_num)
 		while (gap_num-- > 0)
 			str[i++] = '0';
 		ft_strcpy(&str[i], tmp + j);
+		free(tmp);
 	}
 	return (str);
 }
@@ -97,5 +100,6 @@ char	*ft_cut_str(char *str, t_flags *flags)
 	if (!(str = calloc(flags->dot_val + 1, sizeof(char))))
 		return (NULL);
 	ft_strlcpy(str, tmp, flags->dot_val + 1);
+	free(tmp);
 	return (str);
 }

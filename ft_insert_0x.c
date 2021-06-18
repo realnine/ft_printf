@@ -12,31 +12,30 @@
 
 #include "ft_printf.h"
 
-char	*ft_insert_0x(t_flags *flags, char *str)
+char	*insert(t_flags *flags, char *str)
 {
 	char *tmp;
 
 	tmp = str;
+	if (!(str = ft_calloc(ft_strlen(flags->ap_str) + 3, sizeof(char))))
+		return (NULL);
+	str[0] = '0';
+	str[1] = 'x';
+	ft_strcat(str, tmp);
+	free(tmp);
+	return (str);
+}
+
+char	*ft_insert_0x(t_flags *flags, char *str)
+{
 	if (flags->zero > 0 && flags->dot_val == 0)
 	{
 		if (str[0] == '0' && str[1] == '0')
 			str[1] = 'x';
 		else
-		{
-			if (!(str = ft_calloc(ft_strlen(flags->ap_str) + 3, sizeof(char))))
-				return (NULL);
-			str[0] = '0';
-			str[1] = 'x';
-			ft_strcat(str, tmp);
-		}
+			str = insert(flags, str);
 	}
 	else
-	{
-		if (!(str = ft_calloc(ft_strlen(str) + 3, sizeof(char))))
-			return (NULL);
-		str[0] = '0';
-		str[1] = 'x';
-		ft_strcat(str, tmp);
-	}
+		str = insert(flags, str);
 	return (str);
 }

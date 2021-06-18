@@ -6,7 +6,7 @@
 /*   By: jinglee <jinglee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 15:01:06 by jinglee           #+#    #+#             */
-/*   Updated: 2021/06/17 18:41:37 by jinglee          ###   ########.fr       */
+/*   Updated: 2021/06/18 22:54:22 by jinglee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,11 @@ char	*ft_apply_flags(t_flags *flags)
 	char	*str;
 
 	str = flags->ap_str;
+	if (*str == '\0')
+	{
+		if (!(flags->ap_str = calloc(1, sizeof(char))))
+			return (NULL);
+	}
 	ft_crash_flags(flags);
 	if (flags->dot > 0 && flags->dot_val >= 0 && flags->type != '%')
 		str = ft_apply_prec(flags, str);
