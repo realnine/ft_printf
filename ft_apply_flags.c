@@ -77,13 +77,9 @@ void	ft_crash_flags(t_flags *flags)
 char	*ft_apply_flags(t_flags *flags)
 {
 	char	*str;
+	char	*tmp;
 
-	str = flags->ap_str;
-	if (*str == '\0')
-	{
-		if (!(flags->ap_str = calloc(1, sizeof(char))))
-			return (NULL);
-	}
+	str = ft_strdup(flags->ap_str);
 	ft_crash_flags(flags);
 	if (flags->dot > 0 && flags->dot_val >= 0 && flags->type != '%')
 		str = ft_apply_prec(flags, str);

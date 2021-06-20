@@ -17,7 +17,7 @@ char	*insert(t_flags *flags, char *str)
 	char *tmp;
 
 	tmp = str;
-	if (!(str = ft_calloc(ft_strlen(flags->ap_str) + 3, sizeof(char))))
+	if (!(str = ft_calloc(ft_strlen(str) + 3, sizeof(char))))
 		return (NULL);
 	str[0] = '0';
 	str[1] = 'x';

@@ -30,10 +30,10 @@ int	ft_final_putstr(t_flags *flags, char *str)
 			ft_putchar('\0');
 		}
 		cnt++;
-		free(flags->ap_str);
 	}
 	else
 		ft_putstr(str);
+	free(flags->ap_str);
 	free(str);
 	return (cnt);
 }
